@@ -1,0 +1,54 @@
+{
+  "name": "moonshine/import-export",
+  "description": "Import/Export Handlers for MoonShine",
+  "keywords": ["import", "export", "moonshine"],
+  "type": "library",
+  "homepage": "https://moonshine-laravel.com",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/moonshine-software/import-export/issues",
+    "source": "https://github.com/moonshine-software/import-export"
+  },
+  "authors": [
+    {
+      "name": "Danil Shutsky",
+      "email": "info@cutcode.dev",
+      "homepage": "https://cutcode.dev"
+    }
+  ],
+  "require": {
+    "php": "^8.2|^8.3",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "rap2hpoutre/fast-excel": "^5.4"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "MoonShine\\ImportExport\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+
+    }
+  },
+  "conflict": {
+    "laravel/framework": "<10.48.0",
+    "moonshine/moonshine": "<3.0"
+  },
+  "scripts": {
+
+  },
+  "extra": {
+    "laravel": {
+      "providers": []
+    }
+  },
+  "config": {
+    "allow-plugins": {
+
+    }
+  }
+}
