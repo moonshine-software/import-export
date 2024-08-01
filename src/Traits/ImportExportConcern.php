@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MoonShine\Laravel\ImportExport\Traits;
+namespace MoonShine\ImportExport\Traits;
 
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Collections\Fields;
