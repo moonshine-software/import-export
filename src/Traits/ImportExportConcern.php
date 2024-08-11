@@ -14,12 +14,12 @@ use Throwable;
 
 trait ImportExportConcern
 {
-    public function isExportToCsv(): bool
+    protected function isExportToCsv(): bool
     {
         return false;
     }
 
-    public function export(): ?Handler
+    protected function export(): ?Handler
     {
         return ExportHandler::make(__('moonshine::ui.export'))->when(
             $this->isExportToCsv(),
@@ -27,7 +27,7 @@ trait ImportExportConcern
         );
     }
 
-    public function import(): ?Handler
+    protected function import(): ?Handler
     {
         return ImportHandler::make(__('moonshine::ui.import'));
     }
@@ -46,7 +46,7 @@ trait ImportExportConcern
     /**
      * @return list<FieldContract>
      */
-    public function exportFields(): array
+    protected function exportFields(): array
     {
         return [];
     }
@@ -62,7 +62,7 @@ trait ImportExportConcern
     /**
      * @return list<FieldContract>
      */
-    public function importFields(): array
+    protected function importFields(): array
     {
         return [];
     }
