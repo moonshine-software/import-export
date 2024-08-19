@@ -46,7 +46,7 @@ trait ImportExportConcern
     /**
      * @return list<FieldContract>
      */
-    protected function exportFields(): array
+    protected function exportFields(): iterable
     {
         return [];
     }
@@ -62,7 +62,7 @@ trait ImportExportConcern
     /**
      * @return list<FieldContract>
      */
-    protected function importFields(): array
+    protected function importFields(): iterable
     {
         return [];
     }
