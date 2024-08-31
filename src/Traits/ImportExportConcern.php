@@ -74,4 +74,19 @@ trait ImportExportConcern
     {
         return Fields::make($this->importFields())->ensure(FieldContract::class);
     }
+
+    public function beforeImportFilling(array $data): array
+    {
+        return $data;
+    }
+
+    public function beforeImported(mixed $item): mixed
+    {
+        return $item;
+    }
+
+    public function afterImported(mixed $item): mixed
+    {
+        return $item;
+    }
 }

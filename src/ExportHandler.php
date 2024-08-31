@@ -173,14 +173,14 @@ class ExportHandler extends Handler
         $resource->setQueryParams($query);
 
         $items = static function (ResourceContract $resource): Generator {
-            foreach ($resource->resolveQuery()->cursor() as $index => $item) {
+            foreach ($resource->getQuery()->cursor() as $index => $item) {
                 $row = [];
 
                 $fields = $resource->getExportFields();
 
                 $fields->fill(
                     $item->toArray(),
-                    $resource->getModelCast()->cast($item),
+                    $resource->getCaster()->cast($item),
                     $index
                 );
 

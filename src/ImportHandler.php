@@ -197,19 +197,19 @@ class ImportHandler extends Handler
                 }
             )->toArray();
 
-            if (($data[$resource->getModel()->getKeyName()] ?? '') === '') {
-                unset($data[$resource->getModel()->getKeyName()]);
+            if (($data[$resource->getDataInstance()->getKeyName()] ?? '') === '') {
+                unset($data[$resource->getDataInstance()->getKeyName()]);
             }
 
             if ($data === []) {
                 return false;
             }
 
-            $item = isset($data[$resource->getModel()->getKeyName()])
-                ? $resource->getModel()
+            $item = isset($data[$resource->getDataInstance()->getKeyName()])
+                ? $resource->getDataInstance()
                     ->newModelQuery()
-                    ->findOrNew($data[$resource->getModel()->getKeyName()])
-                : $resource->getModel();
+                    ->findOrNew($data[$resource->getDataInstance()->getKeyName()])
+                : $resource->getDataInstance();
 
             $data = $resource->beforeImportFilling($data);
 
