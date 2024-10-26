@@ -15,6 +15,7 @@ use MoonShine\ImportExport\Contracts\HasImportExportContract;
 use MoonShine\ImportExport\Jobs\ExportHandlerJob;
 use MoonShine\Laravel\MoonShineUI;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
+use MoonShine\Laravel\Notifications\NotificationButton;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Exceptions\ActionButtonException;
@@ -208,10 +209,10 @@ class ExportHandler extends Handler
 
         MoonShineNotification::send(
             __('moonshine::ui.resource.export.exported'),
-            [
-                'link' => Storage::disk($disk)->url(trim($dir, '/') . $url),
-                'label' => __('moonshine::ui.download'),
-            ],
+            new NotificationButton(
+                label: __('moonshine::ui.download'),
+                link: Storage::disk($disk)->url(trim($dir, '/') . $url)
+            ),
             ids: $notifyUsers,
         );
 
