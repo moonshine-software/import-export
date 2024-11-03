@@ -27,6 +27,7 @@ use OpenSpout\Writer\Exception\WriterNotOpenedException;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
+use Illuminate\Support\Str;
 
 class ExportHandler extends Handler
 {
@@ -93,10 +94,15 @@ class ExportHandler extends Handler
     private function generateFilePath(): string
     {
         $dir = $this->getDir();
-        $filename = $this->hasFilename() ? $this->filename : $this->getResource()->getUriKey();
+        $filename = $this->hasFilename() ? $this->filename : $this->getDefaultFilename();
         $ext = $this->isCsv() ? 'csv' : 'xlsx';
 
         return sprintf('%s/%s.%s', $dir, $filename, $ext);
+    }
+
+    private function getDefaultFilename(): string
+    {
+        return $this->getResource()->getUriKey() . '-' . Str::uuid();
     }
 
     /**
