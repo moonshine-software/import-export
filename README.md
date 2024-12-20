@@ -1,6 +1,6 @@
 # MoonShine Import/Export Handlers
 
-[Documentation](https:://moonshine-laravel.com/docs/3.x/model-resource/import-export)
+[Documentation](https://moonshine-laravel.com/docs/3.x/model-resource/import-export){:target="_blank"}
 
 ## Requirements
 
