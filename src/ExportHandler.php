@@ -234,7 +234,7 @@ class ExportHandler extends Handler
             throw ActionButtonException::resourceRequired();
         }
 
-        $query = Arr::query(request(['filters', 'sort', 'query-tag'], []));
+        $query = Arr::query(request(['filter', 'sort', 'query-tag'], []));
         $url = $this->getUrl();
         $ts = "ts=" . time();
 
