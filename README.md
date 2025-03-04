@@ -80,4 +80,18 @@ public function afterImported(mixed $item): mixed
 }
 ```
 
+* Queue
+
+```php
+protected function export(): ?Handler
+{
+    return ExportHandler::make(__('moonshine::ui.export'))->queue();
+}
+
+protected function import(): ?Handler
+{
+    return ImportHandler::make(__('moonshine::ui.import'))->queue();
+}
+```
+
 

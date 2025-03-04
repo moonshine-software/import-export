@@ -39,7 +39,7 @@ class ImportHandlerJob implements ShouldQueue
     {
         ImportHandler::process(
             $this->path,
-            new $this->resource(),
+            app($this->resource),
             $this->deleteAfter,
             $this->delimiter,
             $this->notifyUsers,

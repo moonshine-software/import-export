@@ -44,7 +44,7 @@ class ExportHandlerJob implements ShouldQueue
     {
         ExportHandler::process(
             $this->path,
-            new $this->resource(),
+            app($this->resource),
             $this->query,
             $this->disk,
             $this->dir,
