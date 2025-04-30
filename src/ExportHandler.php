@@ -145,7 +145,7 @@ class ExportHandler extends Handler
         }
 
         return response()->download(
-            self::process(
+            static::process(
                 $path,
                 $this->getResource(),
                 $query,
