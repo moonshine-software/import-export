@@ -129,7 +129,7 @@ class ImportHandler extends Handler
             return back();
         }
 
-        self::process(
+        static::process(
             $path,
             $this->getResource(),
             $this->deleteAfter,
