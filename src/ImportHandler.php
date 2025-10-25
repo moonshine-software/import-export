@@ -11,10 +11,9 @@ use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Core\Exceptions\ResourceException;
-use MoonShine\Laravel\Handlers\Handler;
+use MoonShine\Crud\Handlers\Handler;
 use MoonShine\ImportExport\Contracts\HasImportExportContract;
 use MoonShine\ImportExport\Jobs\ImportHandlerJob;
-use MoonShine\Laravel\MoonShineUI;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
 use MoonShine\Support\Enums\ToastType;
 use MoonShine\UI\Components\ActionButton;
@@ -76,7 +75,7 @@ class ImportHandler extends Handler
     public function handle(): Response
     {
         if (! request()->hasFile($this->getInputName())) {
-            MoonShineUI::toast(
+            toast(
                 __('moonshine::ui.resource.import.file_required'),
                 ToastType::ERROR
             );
@@ -90,7 +89,7 @@ class ImportHandler extends Handler
             $requestFile->getClientOriginalExtension(),
             ['csv', 'xlsx']
         )) {
-            MoonShineUI::toast(
+            toast(
                 __('moonshine::ui.resource.import.extension_not_supported'),
                 ToastType::ERROR
             );
@@ -122,7 +121,7 @@ class ImportHandler extends Handler
                 $this->getNotifyUsers(),
             );
 
-            MoonShineUI::toast(
+            toast(
                 __('moonshine::ui.resource.queued')
             );
 
@@ -137,7 +136,7 @@ class ImportHandler extends Handler
             $this->getNotifyUsers(),
         );
 
-        MoonShineUI::toast(
+        toast(
             __('moonshine::ui.resource.import.imported'),
             ToastType::SUCCESS
         );
@@ -242,10 +241,7 @@ class ImportHandler extends Handler
         }
 
         return $this->prepareButton(
-            ActionButton::make(
-                $this->getLabel(),
-                '#'
-            )
+            ActionButton::make($this->getLabel())
                 ->success()
                 ->icon($this->getIconValue(), $this->isCustomIcon(), $this->getIconPath())
                 ->inOffCanvas(

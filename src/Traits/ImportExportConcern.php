@@ -6,7 +6,7 @@ namespace MoonShine\ImportExport\Traits;
 
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Collections\Fields;
-use MoonShine\Laravel\Handlers\Handler;
+use MoonShine\Crud\Handlers\Handler;
 use MoonShine\ImportExport\ExportHandler;
 use MoonShine\ImportExport\ImportHandler;
 use MoonShine\Support\ListOf;

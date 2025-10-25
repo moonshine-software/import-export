@@ -1,10 +1,10 @@
 # MoonShine Import/Export Handlers
 
-[Documentation](https://moonshine-laravel.com/docs/3.x/model-resource/import-export)
+[Documentation](https://moonshine-laravel.com/docs/4.x/model-resource/import-export)
 
 ## Requirements
 
-- MoonShine 3+
+- MoonShine 4+
 - Laravel 10+
 - PHP 8.2+
 
@@ -16,12 +16,12 @@ composer require moonshine/import-export
 
 ## Usage
 
-* Add `trait` `MoonShine\ImportExport\Traits\ImportExportConcern` and `interface` `MoonShine\ImportExport\Contracts\HasImportExportContract` to ModelResource
+* In ModelResource add the `ImportExportConcern` trait and implement the `HasImportExportContract` interface.
 
 ```php
-/**
- * @extends ModelResource<Category>
- */
+use MoonShine\ImportExport\Contracts\HasImportExportContract;
+use MoonShine\ImportExport\Traits\ImportExportConcern;
+
 class CategoryResource extends ModelResource implements HasImportExportContract
 {
     use ImportExportConcern;
@@ -30,38 +30,28 @@ class CategoryResource extends ModelResource implements HasImportExportContract
 }
 ```
 
-* Define fields
+* Define the fields that will be involved in import and export.
 
 ```php
-/**
- * @extends ModelResource<Category>
- */
-class CategoryResource extends ModelResource implements HasImportExportContract
+protected function exportFields(): iterable
 {
-    use ImportExportConcern;
-    
-    // ...
-    
-    protected function exportFields(): iterable
-    {
-        return [
-            ID::make(),
-            Position::make(),
-            Text::make('Name'),
-        ];
-    }
-    
-    protected function importFields(): iterable
-    {
-        return [
-            ID::make(),
-            Text::make('Name'),
-        ];
-    }
+    return [
+        ID::make(),
+        Position::make(),
+        Text::make('Name'),
+    ];
+}
+
+protected function importFields(): iterable
+{
+    return [
+        ID::make(),
+        Text::make('Name'),
+    ];
 }
 ```
 
-* Events
+* Import Events.
 
 ```php
 public function beforeImportFilling(array $data): array
@@ -80,12 +70,17 @@ public function afterImported(mixed $item): mixed
 }
 ```
 
-* Queue
+* Queue.
 
 ```php
 protected function export(): ?Handler
 {
-    return ExportHandler::make(__('moonshine::ui.export'))->queue();
+    return ExportHandler::make(__('moonshine::ui.export'))
+        ->when(
+            $this->isExportToCsv(),
+            static fn (ExportHandler $handler): ExportHandler => $handler->csv()
+        )
+        ->queue();
 }
 
 protected function import(): ?Handler
@@ -93,5 +88,3 @@ protected function import(): ?Handler
     return ImportHandler::make(__('moonshine::ui.import'))->queue();
 }
 ```
-
-

@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use MoonShine\Contracts\Core\ResourceContract;
 use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Core\Exceptions\ResourceException;
-use MoonShine\Laravel\Handlers\Handler;
+use MoonShine\Crud\Handlers\Handler;
 use MoonShine\ImportExport\Contracts\HasImportExportContract;
 use MoonShine\ImportExport\Jobs\ExportHandlerJob;
-use MoonShine\Laravel\MoonShineUI;
 use MoonShine\Laravel\Notifications\MoonShineNotification;
-use MoonShine\Laravel\Notifications\NotificationButton;
+use MoonShine\Crud\Notifications\NotificationButton;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Exceptions\ActionButtonException;
@@ -137,7 +136,7 @@ class ExportHandler extends Handler
                 $this->getNotifyUsers(),
             );
 
-            MoonShineUI::toast(
+            toast(
                 __('moonshine::ui.resource.queued')
             );
 
