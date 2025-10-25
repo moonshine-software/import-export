@@ -37,7 +37,7 @@
   },
   "conflict": {
     "laravel/framework": "<10.48.0",
-    "moonshine/moonshine": "<3.0"
+    "moonshine/moonshine": "<4.0"
   },
   "scripts": {
 
