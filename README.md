@@ -6,7 +6,11 @@
 
 - MoonShine 4+
 - Laravel 10+
-- PHP 8.2+
+
+| Version | PHP       |
+|---------|-----------|
+| 2.0     | PHP 8.2+  |
+| 2.1     | PHP 8.3+  |
 
 ## Installation
 
