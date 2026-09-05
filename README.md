@@ -4,18 +4,19 @@
 
 ## Requirements
 
-- MoonShine 4+
-- Laravel 10+
+- MoonShine 5.x
+- Laravel 11–13
 
 | Version | PHP       |
 |---------|-----------|
 | 2.0     | PHP 8.2+  |
 | 2.1     | PHP 8.3+  |
+| 3.0     | PHP 8.4+  |
 
 ## Installation
 
 ```shell
-composer require moonshine/import-export
+composer require moonshine/import-export:^3.0
 ```
 
 ## Usage
@@ -33,6 +34,20 @@ class CategoryResource extends ModelResource implements HasImportExportContract
     // ...
 }
 ```
+
+* In the resource's `IndexPage`, add `ImportExportHandlersConcern` to register the buttons and handlers.
+
+```php
+use MoonShine\ImportExport\Traits\ImportExportHandlersConcern;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
+
+class CategoryIndexPage extends IndexPage
+{
+    use ImportExportHandlersConcern;
+}
+```
+
+Register `CategoryIndexPage::class` in the resource's `pages()` method alongside its form and detail pages.
 
 * Define the fields that will be involved in import and export.
 
@@ -74,7 +89,7 @@ public function afterImported(mixed $item): mixed
 }
 ```
 
-* Queue.
+* Queue (override these methods on the `IndexPage`).
 
 ```php
 protected function export(): ?Handler
@@ -92,3 +107,12 @@ protected function import(): ?Handler
     return ImportHandler::make(__('moonshine::ui.import'))->queue();
 }
 ```
+
+## Upgrading from 2.x
+
+Keep `ImportExportConcern`, `HasImportExportContract`, field definitions, and import events on the resource.
+Add `ImportExportHandlersConcern` to its index page. Move any `export()`, `import()`,
+`isExportToCsv()`, and `handlers()` overrides from the resource to that page.
+From a page override, use `$this->getResource()` to access the resource (for example,
+`->filename($this->getResource()->getUriKey())`). Handlers still receive the resource
+through the index page's `getHandlers()`, including for queued import and export.
