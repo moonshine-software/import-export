@@ -17,9 +17,10 @@
     }
   ],
   "require": {
-    "php": "^8.3",
+    "php": "^8.4",
     "ext-curl": "*",
     "ext-json": "*",
+    "moonshine/laravel": "^5.0",
     "rap2hpoutre/fast-excel": "^5.4"
   },
   "require-dev": {
@@ -35,8 +36,8 @@
     }
   },
   "conflict": {
-    "laravel/framework": "<10.48.0",
-    "moonshine/moonshine": "<4.0"
+    "laravel/framework": "<11.0",
+    "moonshine/moonshine": "<5.0"
   },
   "scripts": {
 
